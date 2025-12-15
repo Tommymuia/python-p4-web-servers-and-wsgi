@@ -1,1 +1,17 @@
 #!/usr/bin/env python3
+from werkzeug import Request, Response
+
+@Request.application
+
+def application(request):
+    print(f'This server is running at port{request.remote_addr}')
+    return Response('A WSGI generated this response!')
+
+
+if __name__ =='__main__':
+    from werkzeug.serving import run_simple
+    run_simple(
+        hostname = 'Localhost',
+        port = 5555,
+        application = application
+    )
